@@ -15,11 +15,16 @@ __version__ = '2.0.0'
 ROOT_DIR = os.path.dirname(sys.modules['__main__'].__file__)
 ICON = os.path.join(ROOT_DIR, 'resources/blackjack-icon.png')
 
-# King
-# Queen
-# Jack (Knave)
-# Club (Hound Tethers)
-# Heart (Hunting Horns)
-# Spade (Game Nooses)
-# Diamond (Dog Collars)
-# Source: https://www.metmuseum.org/art/collection/search/475513
+"""
+Deck:
+    Values:
+        King
+        Queen
+        Jack (Knave)
+    Kinds:
+        Club (Hound Tethers)
+        Heart (Hunting Horns)
+        Spade (Game Nooses)
+        Diamond (Dog Collars)
+Source: The Cloisters Playing Cards (https://www.metmuseum.org/art/collection/search/475513)
+"""
