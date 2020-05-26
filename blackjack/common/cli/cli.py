@@ -16,9 +16,7 @@ def execute():
     player_total = get_total(player_hand)
 
     # Show player hand
-    os.system('clear')
-    print('You:')
-    show_hand(player_hand)
+    print(f'You: {get_hand(player_hand)}')
 
     # Player play
     response = input('Draw a card? ')
@@ -28,9 +26,7 @@ def execute():
         player_total = get_total(player_hand)
 
         # Show player hand
-        os.system('clear')
-        print('You:')
-        show_hand(player_hand)
+        print(f'You: {get_hand(player_hand)}')
 
         if player_total <= 21 and len(player_hand) < 5:
             response = input('Draw a card? ')
@@ -44,23 +40,20 @@ def execute():
             opponent_total = get_total(opponent_hand)
 
     # Show opponent hand
-    print('Opponent:')
-    show_hand(opponent_hand)
+    print(f'Opponent: {get_hand(opponent_hand)}')
 
     # Show game results
-    show_game_results(player_hand, opponent_hand)
+    print(get_game_result(player_hand, opponent_hand))
 
 
-def initialize_deck():
-    card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    kinds = ['♣', '◆', '♥', '♠']
-    deck = []
+def clear():
+    # Windows
+    if os.name == 'nt':
+        _ = os.system('cls')
 
-    for value in card_values:
-        for kind in kinds:
-            deck += [(value, kind)]
-
-    return deck
+    # Linux and macOS
+    else:
+        _ = os.system('clear')
 
 
 def draw_card(deck):
@@ -71,23 +64,43 @@ def draw_card(deck):
     return [card]
 
 
-def get_value(card):
-    if card[0] in ['J', 'Q', 'K']:
-        return 10
+def get_game_result(player_hand, opponent_hand):
+    player_total = get_total(player_hand)
+    opponent_total = get_total(opponent_hand)
 
-    elif card[0] == 'A':
-        return [1, 11]
+    if player_total <= 21 < opponent_total:
+        game_result = 'Opponent busted: Win'
+
+    elif player_total > 21 >= opponent_total:
+        game_result = 'You busted: Lose'
+
+    # Five-Card Charlie Rule
+
+    elif len(player_hand) >= 5 > len(opponent_hand):
+        game_result = 'You have five cards: Win'
+
+    elif len(player_hand) < 5 <= len(opponent_hand):
+        game_result = 'Opponent has five cards: Lose'
+
+    elif len(player_hand) >= 5 <= len(opponent_hand):
+        game_result = 'Both players have five cards: Tie'
+
+    elif player_total > opponent_total:
+        game_result = 'You have a better hand: Win'
+
+    elif player_total == opponent_total:
+        game_result = 'Both players have equivalent hands: Tie'
 
     else:
-        return card[0]
+        game_result = 'Opponent has a better hand: Lose'
+
+    return game_result
 
 
-def sort_cards(cards):
-    # Source: https://stackoverflow.com/questions/37179737/sorting-list-of-cards
-    card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    sort_map = {c: i for i, c in enumerate(card_values)}
+def get_hand(hand):
+    total = get_total(hand)
 
-    return sorted(cards, key=lambda card: (sort_map[card[0]], card[1]))
+    return f'{hand} {total}'
 
 
 def get_total(cards):
@@ -108,36 +121,32 @@ def get_total(cards):
     return total
 
 
-def show_hand(hand):
-    total = get_total(hand)
+def get_value(card):
+    if card[0] in ['J', 'Q', 'K']:
+        return 10
 
-    print('%s %d' % (hand, total))
-
-
-def show_game_results(player_hand, opponent_hand):
-    player_total = get_total(player_hand)
-    opponent_total = get_total(opponent_hand)
-
-    if player_total <= 21 < opponent_total:
-        print('Opponent busted: Win')
-
-    elif player_total > 21 >= opponent_total:
-        print('You busted: Lose')
-
-    elif player_total > opponent_total:
-        print('You have a better hand: Win')
-
-    elif len(player_hand) >= 5 > len(opponent_hand):
-        print('You have five cards: Win')
-
-    elif len(player_hand) < 5 <= len(opponent_hand):
-        print('Opponent has five cards: Lose')
-
-    elif len(player_hand) >= 5 <= len(opponent_hand):
-        print('Both players have five cards: Tie')
-
-    elif player_total == opponent_total:
-        print('Both players have equivalent hands: Tie')
+    elif card[0] == 'A':
+        return [1, 11]
 
     else:
-        print('Opponent has a better hand: Lose')
+        return card[0]
+
+
+def initialize_deck():
+    ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    suits = ['♣', '◆', '♥', '♠']
+    deck = []
+
+    for rank in ranks:
+        for suit in suits:
+            deck += [(rank, suit)]
+
+    return deck
+
+
+def sort_cards(cards):
+    # Source: https://stackoverflow.com/questions/37179737/sorting-list-of-cards
+    ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    sort_map = {rank: x for x, rank in enumerate(ranks)}
+
+    return sorted(cards, key=lambda card: (sort_map[card[0]], card[1]))

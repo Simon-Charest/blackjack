@@ -37,6 +37,17 @@ Sources:
     The Cloisters Playing Cards (https://www.metmuseum.org/art/collection/search/475513)
 """
 
+BACKGROUND = 'black'
+FOREGROUND = 'white'
+FONT = ('Helvetica', 16)
+DECK = 'cloisters'
+HEIGHT = 600
+WIDTH = 800
+CARD_HEIGHT = 135
+CARD_WIDTH = 75
+CARD_SPACING = 100
+BUFFER_HEIGHT = 25
+BUFFER_WIDTH = 50
 DECKS = {
     'cloisters': {
         '♣A': {
