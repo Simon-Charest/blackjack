@@ -26,35 +26,38 @@ def execute():
     player_total = game.get_total(player_hand)
     opponent_total = game.get_total(opponent_hand)
 
-    # Create list of images
-    player_cards = get_image_list(player_hand)
-
-    # Player
+    # Display player label
+    player_text = f'Your hand: {player_total}'
     player_label = Label(root, bg=constant.BACKGROUND, fg=constant.FOREGROUND, font=constant.FONT,
-                         text=f'Your hand: {player_total}')
+                         text=player_text)
     player_label.grid(column=0, row=0, sticky=NW)
 
-    # Player hand
+    # Display player hand's canvas
     player_canvas = Canvas(root, bg=constant.BACKGROUND, highlightbackground=constant.BACKGROUND,
                            height=constant.CARD_HEIGHT + constant.BUFFER_HEIGHT, width=constant.WIDTH)
     player_canvas.grid(column=1, row=0)
 
-    # Draw player cards
-    paint(player_cards, player_canvas)
+    # Display player cards
+    player_cards = get_image_list(player_hand)
+    display(player_cards, player_canvas)
 
+    # Display opponent label
+    opponent_text = f"Opponent's hand:"
+    # opponent_text = f"Opponent's hand: {opponent_total}"
     opponent_label = Label(root, bg=constant.BACKGROUND, fg=constant.FOREGROUND, font=constant.FONT,
-                           text=f"Opponent's hand: {opponent_total}")
+                           text=opponent_text)
     opponent_label.grid(column=0, row=1, sticky=NW)
 
+    # Display opponent hand's canvas
     opponent_canvas = Canvas(root, bg=constant.BACKGROUND, highlightbackground=constant.BACKGROUND,
                              height=constant.CARD_HEIGHT + constant.BUFFER_HEIGHT, width=constant.WIDTH)
     opponent_canvas.grid(column=1, row=1)
 
-    # Create list of images
-    opponent_cards = get_image_list(opponent_hand)
+    # TODO: Dev Draw / Stand game logic
 
-    # Draw computer cards
-    paint(opponent_cards, opponent_canvas)
+    # Display computer cards (face down)
+    opponent_cards = get_image_list(opponent_hand, True)
+    display(opponent_cards, opponent_canvas)
 
     # Display button
     draw_button = Button(root, font=constant.FONT, height=2, width=15, text='Draw', command=lambda: draw())
@@ -84,19 +87,26 @@ def get_filename(card, extension='.png'):
     return filename
 
 
-def get_image(card, deck=constant.DECK):
+def get_image(card, face_down=False, deck=constant.DECK):
     filename = get_filename(card)
-    file = os.path.join(constant.ROOT_DIR, f'resources/{deck}/{filename}')
+
+    if face_down:
+        file_path = f'resources/{deck}/{constant.FACE_DOWN}'
+
+    else:
+        file_path = f'resources/{deck}/{filename}'
+
+    file = os.path.join(constant.ROOT_DIR, file_path)
     image = PhotoImage(file=file)
 
     return image
 
 
-def get_image_list(cards):
+def get_image_list(cards, face_down=False):
     list_ = list()
 
     for card in cards:
-        list_.append(get_image(card))
+        list_.append(get_image(card, face_down=face_down))
 
     return list_
 
@@ -136,7 +146,7 @@ def get_suit_name(suit):
     return suit_name
 
 
-def paint(cards, canvas):
+def display(cards, canvas, face_down=False):
     x = 0
 
     for card in cards:

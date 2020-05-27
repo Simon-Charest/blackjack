@@ -18,6 +18,7 @@ BACKGROUND = 'black'
 FOREGROUND = 'white'
 FONT = ['Helvetica', 16]
 DECK = 'cloisters'
+FACE_DOWN = 'face_down.png'
 HEIGHT = 600
 WIDTH = 800
 CARD_HEIGHT = 200
