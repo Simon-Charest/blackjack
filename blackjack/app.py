@@ -3,5 +3,5 @@ from blackjack.common.gui import gui
 
 
 def run():
-    cli.execute()
-    # gui.execute()
+    # cli.execute()
+    gui.execute()
