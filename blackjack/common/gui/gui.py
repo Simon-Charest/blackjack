@@ -27,9 +27,9 @@ def execute():
     opponent_total = game.get_total(opponent_hand)
 
     # Display player label
-    player_text = f'Your hand: {player_total}'
+    player_text = StringVar(value=f'Your hand: {player_total}')
     player_label = Label(root, bg=constant.BACKGROUND, fg=constant.FOREGROUND, font=constant.FONT,
-                         text=player_text)
+                         textvariable=player_text)
     player_label.grid(column=0, row=0, sticky=NW)
 
     # Display player hand's canvas
@@ -42,10 +42,10 @@ def execute():
     display(player_cards, player_canvas)
 
     # Display opponent label
-    opponent_text = f"Opponent's hand:"
-    # opponent_text = f"Opponent's hand: {opponent_total}"
+    opponent_text = StringVar(value=f"Opponent's hand:")
+    # opponent_text.set(f"Opponent's hand: {opponent_total}")
     opponent_label = Label(root, bg=constant.BACKGROUND, fg=constant.FOREGROUND, font=constant.FONT,
-                           text=opponent_text)
+                           textvariable=opponent_text)
     opponent_label.grid(column=0, row=1, sticky=NW)
 
     # Display opponent hand's canvas
@@ -91,7 +91,7 @@ def get_image(card, face_down=False, deck=constant.DECK):
     filename = get_filename(card)
 
     if face_down:
-        file_path = f'resources/{deck}/{constant.FACE_DOWN}'
+        file_path = f'resources/{deck}/{constant.CARD_BACK}'
 
     else:
         file_path = f'resources/{deck}/{filename}'

@@ -18,9 +18,10 @@ BACKGROUND = 'black'
 FOREGROUND = 'white'
 FONT = ['Helvetica', 16]
 DECK = 'cloisters'
-FACE_DOWN = 'face_down.png'
+#DECK = 'standard'
 HEIGHT = 600
 WIDTH = 800
+CARD_BACK = 'back.png'
 CARD_HEIGHT = 200
 CARD_WIDTH = 75
 CARD_SPACING = 100
@@ -45,6 +46,10 @@ Deck:
         Spade: black
 Sources:
     Four-color deck (https://en.wikipedia.org/wiki/Four-color_deck)
+    Ogre Battle Saga Wiki - Tarot Cards (https://ogrebattlesaga.fandom.com/wiki/Tarot_Cards)
+    Rider-Waite tarot deck (https://en.wikipedia.org/wiki/Rider-Waite_tarot_deck)
     Standard 52-card deck (https://en.wikipedia.org/wiki/Standard_52-card_deck)
+    Tarot Nouveau (https://en.wikipedia.org/wiki/Tarot_Nouveau)
+    Tarot of Marseilles (https://en.wikipedia.org/wiki/Tarot_of_Marseilles)
     The Cloisters Playing Cards (https://www.metmuseum.org/art/collection/search/475513)
 """

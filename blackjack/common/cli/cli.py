@@ -46,7 +46,7 @@ def execute():
     print(game.get_game_result(player_hand, opponent_hand))
 
 
-def clear():
+def clear_screen():
     # Windows
     if os.name == 'nt':
         _ = os.system('cls')
