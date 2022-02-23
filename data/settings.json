@@ -1,0 +1,25 @@
+{
+  "icon": "resources/blackjack-icon.png",
+  "background": "black",
+  "foreground": "white",
+  "deck": "standard",
+  "height": 600,
+  "width": 800,
+  "font":
+  {
+    "face": "Helvetica",
+    "size": 16
+  },
+  "card":
+  {
+    "back": "back.png",
+    "height": 200,
+    "width": 75,
+    "spacing": 100
+  },
+  "buffer":
+  {
+    "height": 25,
+    "width": 50
+  }
+}

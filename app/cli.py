@@ -1,8 +1,8 @@
-from blackjack.common.game import game
+from app import game
 import os
 
 
-def execute():
+def run():
     # Initialize game
     deck = game.initialize_deck()
     player_hand = []
@@ -14,6 +14,9 @@ def execute():
     opponent_hand += game.draw_card(deck)
     player_hand += game.draw_card(deck)
     player_total = game.get_total(player_hand)
+
+    # Show opponent's first card
+    print(f'Opponent: {game.get_hand([opponent_hand[0]])}')
 
     # Show player hand
     print(f'You: {game.get_hand(player_hand)}')

@@ -1,16 +1,16 @@
-from blackjack.common.constant import constant
-from blackjack.common.game import game
+from app import constant, game
 from tkinter import *
+import main
 import os
 
 
-def execute():
+def run():
     # Display application
     root = Tk()
     root.configure(background=constant.BACKGROUND)
     root.geometry(f'{constant.WIDTH}x{constant.HEIGHT}')
     root.resizable(0, 0)  # Prevent resizing and disable maximize button
-    root.title(constant.__project__)
+    root.title(main.__project__)
     root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file=constant.ICON))
 
     # Initialize game

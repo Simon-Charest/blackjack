@@ -90,7 +90,6 @@ def initialize_deck():
 
 
 def sort_cards(cards):
-    # Source: https://stackoverflow.com/questions/37179737/sorting-list-of-cards
     ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     sort_map = {rank: x for x, rank in enumerate(ranks)}
 

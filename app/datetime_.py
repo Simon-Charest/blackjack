@@ -1,8 +1,8 @@
-import datetime
+from datetime import datetime
 
 
 def get_year():
-    return datetime.datetime.now().year
+    return datetime.now().year
 
 
 def get_years(first_year):
